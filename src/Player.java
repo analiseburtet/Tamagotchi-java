@@ -3,11 +3,19 @@ import java.awt.*;
 
 public class Player {
     private String name;
-    private int age;
+    private int age = 0;
     private int weigth;
     private int x,y;
     private Image imagem;
     private PlayerStatus status = PlayerStatus.ALIVE;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     private int sleepCount = 0;
     public void load(){
@@ -34,7 +42,7 @@ public class Player {
         }
         updateStatus();
     }
-    public void skipSleep(String value){
+    public void skipSleep(){
             // value == Permanecer acordado
             sleepCount++;
             if(sleepCount == 5) {
