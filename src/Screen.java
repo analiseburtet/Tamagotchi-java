@@ -1,11 +1,9 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Screen extends JFrame implements ActionListener {
     Player player;
-//    int randomNumber = generateRandomNumber();
     JButton jButtonSleep;
     JButton jButtonSkip;
     JButton jButtonComerMuito;
@@ -53,44 +51,54 @@ public class Screen extends JFrame implements ActionListener {
     }
     public Screen(){
         player = new Player();
-        jButtonSleep = new JButton("Dormir");
+        jButtonSleep = new JButton("Sleep");
         jButtonSleep.setBounds(200,600, 250, 70);
 
         add(jButtonSleep);
 
         jButtonSleep.addActionListener(this::actionPerformed);
 
-        jButtonSkip = new JButton("Ignorar");
+        jButtonSkip = new JButton("Ignore");
         jButtonSkip.setBounds(600,600, 250, 70);
 
         add(jButtonSkip);
 
         jButtonSkip.addActionListener(this::skipAction);
 
-        jButtonComerMuito = new JButton("Comer muito");
-        jButtonComerMuito.setBounds(700,600, 50, 70);
+        jButtonComerMuito = new JButton("Eat a lot");
+        jButtonComerMuito.setBounds(150,600, 250, 70);
 
         add(jButtonComerMuito);
 
-        jButtonComerPouco = new JButton("Comer pouco");
-        jButtonComerPouco.setBounds(700,600, 50, 70);
+        jButtonComerMuito.addActionListener(this::eatALotAction);
+
+        jButtonComerPouco = new JButton("Eat little");
+        jButtonComerPouco.setBounds(450,600, 250, 70);
 
         add(jButtonComerPouco);
 
-        jButtonNaoComer = new JButton("Não comer");
-        jButtonNaoComer.setBounds(700,600, 50, 70);
+        jButtonComerPouco.addActionListener(this::eatLittleAction);
+
+        jButtonNaoComer = new JButton("Don't eat");
+        jButtonNaoComer.setBounds(800,600, 250, 70);
 
         add(jButtonNaoComer);
 
+        jButtonNaoComer.addActionListener(this::notEatAction);
+
         jButtonRun = new JButton("Run");
-        jButtonRun.setBounds(700,600, 50, 70);
+        jButtonRun.setBounds(200,600, 250, 70);
 
         add(jButtonRun);
 
+        jButtonRun.addActionListener(this::runAction);
+
         jButtonWalk = new JButton("Walk");
-        jButtonWalk.setBounds(700,600, 50, 70);
+        jButtonWalk.setBounds(600,600, 250, 70);
 
         add(jButtonWalk);
+
+        jButtonWalk.addActionListener(this::walkAction);
 
         imgLabel = new JLabel(new ImageIcon("res/background.jpg"));
         cat = new JLabel(new ImageIcon("res/cat.gif"));
@@ -111,10 +119,6 @@ public class Screen extends JFrame implements ActionListener {
         return (int) (Math.random() * 3);
     }
 
-//    public void setRandomNumber(int number){
-//        this.randomNumber = number;
-//    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         JOptionPane.showMessageDialog(null, "Mensagem");
@@ -122,6 +126,21 @@ public class Screen extends JFrame implements ActionListener {
 
     public void skipAction(ActionEvent e) {
         player.skipSleep();
+        render();
+    }
+    private void walkAction(ActionEvent e) {
+        render();
+    }
+    private void runAction(ActionEvent e) {
+        render();
+    }
+    private void notEatAction(ActionEvent e) {
+        render();
+    }
+    private void eatALotAction(ActionEvent e) {
+        render();
+    }
+    private void eatLittleAction(ActionEvent e) {
         render();
     }
 }
