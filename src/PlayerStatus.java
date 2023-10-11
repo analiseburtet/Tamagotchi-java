@@ -1,5 +1,6 @@
 public enum PlayerStatus {
     ALIVE,
     EXPLODED,
-    DEAD
+    DEAD,
+    SLEEPY
 }
