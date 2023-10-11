@@ -1,86 +1,63 @@
 import javax.swing.*;
-import java.awt.*;
 
+//author Ana Burtet
 public class Player {
     private String name;
-    private int age = 0;
-    private int weigth = 1;
-    private int x,y;
-    private Image imagem;
+    private int age = 0, weight = 1;
+    private JLabel image;
     private PlayerStatus status = PlayerStatus.ALIVE;
+    private int sleepCount = 0;
 
+    public String getName() {
+        return name;
+    }
+    public Player() {
+        // constructor, Jett is my cat's name :)
+        this.name = "Jett";
+        this.image = new JLabel(new ImageIcon("res/cat.gif"));
+    }
     public int getAge() {
         return age;
     }
-
-    public void setAge(int age) {
-        this.age = age;
+    public JLabel getImage() {
+        return image;
     }
-
-    private int sleepCount = 0;
-    public void load(){
-        ImageIcon referencia = new ImageIcon("res/cat.gif");
-        imagem = referencia.getImage();
+    public void setImage(String url) {
+        this.image.setIcon(new ImageIcon(url));
     }
-
     private void updateStatus(){
-        if(weigth > 20){
+        if(weight > 20){
             status = PlayerStatus.EXPLODED;
-        } else if (weigth <= 0) {
+        } else if (weight <= 0) {
             status = PlayerStatus.DEAD;
         }
+        if(age >= 15) status = PlayerStatus.DEAD;
     }
-
     public PlayerStatus getStatus() {
         return status;
     }
-
     public void setStatus(PlayerStatus status) {
         this.status = status;
     }
-
-    public int getWeigth() {
-        return weigth;
+    public int getWeight() {
+        return weight;
     }
-
-    public void setWeigth(int weigth) {
-        this.weigth = weigth;
-    }
-
-    public void eat(String value){
-        // do something
-        switch (value){
-            case "nao comer":
-                weigth = weigth - 2;
-            case "comer pouco":
-                weigth = weigth + 5;
-            default:
-                weigth = weigth + 1;
-        }
-        updateStatus();
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
     public void skipSleep(){
-            // TO CHECK IF CAT SHOULD BE FORCED TO SLEEP
-            sleepCount++;
-            if(sleepCount == 5) {
-                status = PlayerStatus.SLEEPY;
-            }
+        // TO CHECK IF CAT SHOULD BE FORCED TO SLEEP
+        sleepCount++;
+        if(sleepCount == 5) {
+            status = PlayerStatus.SLEEPY;
+        }
     }
 
     public void sleep(){
         // reset quantity of skipped sleep
         sleepCount = 0;
-        // update aga in one day
+        // update age in one day
         age++;
         updateStatus();
-        // change cat gif
-    }
-
-    public Image getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(Image imagem) {
-        this.imagem = imagem;
     }
 }
