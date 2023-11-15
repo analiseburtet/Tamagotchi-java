@@ -224,23 +224,34 @@ public class Screen extends JFrame {
     }
     public void skipAction(ActionEvent e) {
         // method that is called on skip button click
+        hideButtons();
         player.skipSleep();
-        if(player.getStatus() == PlayerStatus.SLEEPY){
+        if(player.getSleepCount() == 5){
+            hideButtons();
+            player.sleep();
+            numberOfDays.setText(String.valueOf(player.getAge()));
             player.setImage("res/sleepcat.gif");
         }
-        render();
+        setTimeout(() -> {
+            if(player.getStatus() == PlayerStatus.DEAD) return;
+            player.setImage("res/cat.gif");
+            render();
+        },3000);
     }
     private void walkAction(ActionEvent e) {
         // method that is called on walk button click
         hideButtons();
         player.setImage("res/walk.gif");
         // weight -1 kilos and ask for food
-        handleWeight(-1);
+        setTimeout(() -> {
+            // weight - 1 kilos
+            handleWeight(-1);
+        },10000);
         setTimeout(() -> {
             player.setImage("res/cat.gif");
             setShouldEat(true);
             render();
-        },10000);
+        },11000);
     }
     private void runAction(ActionEvent e) {
         // method that is called on run button click
@@ -267,17 +278,22 @@ public class Screen extends JFrame {
         //method that is called on notEat button click
         // less 2 kilos each time it does not eat
         handleWeight(-2);
+        render();
     }
     private void eatALotAction(ActionEvent e) {
         // method that is called on eat a lot button click
         hideButtons();
-        // gain 5 kilos
-        handleWeight(5);
         player.setImage("res/eatalot.gif");
+        // gain 5 kilos
         setTimeout(() -> {
-            // sleep after eating a lot
-            sleepAction(e);
-        },2000);
+            handleWeight(5);
+        }, 2000);
+        setTimeout(() -> {
+            if(player.getStatus() != PlayerStatus.EXPLODED) {
+                // sleep after eating a lot
+                sleepAction(e);
+            }
+        }, 3000);
     }
     private void eatLittleAction(ActionEvent e) {
         // method that is called on eat a little button click

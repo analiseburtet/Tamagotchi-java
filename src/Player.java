@@ -11,6 +11,11 @@ public class Player {
     public String getName() {
         return name;
     }
+
+    public int getSleepCount() {
+        return sleepCount;
+    }
+
     public Player() {
         // constructor, Jett is my cat's name :)
         this.name = "Jett";
@@ -30,8 +35,7 @@ public class Player {
             status = PlayerStatus.EXPLODED;
         } else if (weight <= 0) {
             status = PlayerStatus.DEAD;
-        }
-        if(age >= 15) status = PlayerStatus.DEAD;
+        }if(age >= 15) status = PlayerStatus.DEAD;
     }
     public PlayerStatus getStatus() {
         return status;
